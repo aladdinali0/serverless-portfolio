@@ -1,0 +1,49 @@
+# Cloud Project
+
+Hello and welcome to my Cloud Project. So, what I created down below is a 
+serverless website with a real-time visitor counter, built on AWS. 
+
+**Live Demo:** https://d2cbn7ad8iqtm5.cloudfront.net/
+
+---
+
+## Architecture
+
+- **Frontend:** S3 + CloudFront (HTTPS, global CDN, private origin)
+- **Backend:** Lambda (Python) + API Gateway
+- **Database:** DynamoDB
+- **Security:** CloudFront OAC, IAM least privilege, private S3
+
+---
+
+## How It Works
+
+1. User visits the website.
+2. JavaScript in the frontend sends a request to the API Gateway endpoint to fetch the current visitor count.
+3. Lambda function reads visitor count from DynamoDB, increments it, and saves it.
+4. Updated count is returned and displayed on the page.
+
+---
+
+## Tech Stack
+
+- AWS (S3, CloudFront, Lambda, API Gateway, DynamoDB, IAM)
+- Python 3.12
+- HTML / CSS / JavaScript
+- Git & GitHub
+
+---
+
+
+## Coming Soon...
+
+- Infrastructure as Code (Terraform)
+- Implementing CI/CD with GitHub Actions
+- Adding CloudWatch monitoring and alerts
+
+---
+
+## Author
+
+**Aladdin Ali**  
+[LinkedIn](https://linkedin.com/in/aladdin-ali) | [GitHub](https://github.com/aladdinali0)
