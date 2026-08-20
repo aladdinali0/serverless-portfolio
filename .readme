@@ -3,7 +3,24 @@
 Hello and welcome to my Cloud Project. So, what I created down below is a 
 serverless website with a real-time visitor counter, built on AWS. 
 
+<br>
+
+[![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Serverless](https://img.shields.io/badge/Serverless-FD5750?style=for-the-badge&logo=serverless&logoColor=white)](https://www.serverless.com/)
+[![CloudFront](https://img.shields.io/badge/CloudFront-FF9900?style=for-the-badge&logo=amazon-cloudfront&logoColor=white)](https://aws.amazon.com/cloudfront/)
+[![Lambda](https://img.shields.io/badge/Lambda-FF9900?style=for-the-badge&logo=aws-lambda&logoColor=white)](https://aws.amazon.com/lambda/)
+[![DynamoDB](https://img.shields.io/badge/DynamoDB-4053D6?style=for-the-badge&logo=amazon-dynamodb&logoColor=white)](https://aws.amazon.com/dynamodb/)
+
+<br>
+
 **Live Demo:** https://d2cbn7ad8iqtm5.cloudfront.net/
+
+<p align="center">
+  <img src="screenshot.png" width="80%" alt="Screenshot" />
+  <br>
+  <em>Screenshot of my website.</em>
+</p>
 
 ---
 
