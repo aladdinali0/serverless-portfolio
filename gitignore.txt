@@ -1,0 +1,23 @@
+# AWS credentials
+.aws/
+aws-credentials
+*.pem
+*.key
+
+# Environment variables
+.env
+.env.*
+*.env
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
