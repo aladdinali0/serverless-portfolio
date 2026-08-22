@@ -14,7 +14,7 @@ serverless website with a real-time visitor counter, built on AWS.
 
 <br>
 
-**Live Demo:** https://d2cbn7ad8iqtm5.cloudfront.net/
+**Live Demo:** https://dczebdn2hrm2o.cloudfront.net
 
 <p align="center">
   <img src="screenshot.png" width="80%" alt="Screenshot" />
@@ -48,15 +48,16 @@ serverless website with a real-time visitor counter, built on AWS.
 - Python 3.12
 - HTML / CSS / JavaScript
 - Git & GitHub
+- Terraform
 
 ---
 
 
-## Coming Soon...
+## Completed
 
-- Infrastructure as Code (Terraform)
-- Implementing CI/CD with GitHub Actions
-- Adding CloudWatch monitoring and alerts
+- ✅ Infrastructure as Code (Terraform)
+- 🔜 CI/CD with GitHub Actions (Coming Soon)
+- 🔜 CloudWatch monitoring and alerts (Coming Soon)
 
 ---
 
