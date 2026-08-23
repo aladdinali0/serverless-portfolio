@@ -1,7 +1,8 @@
-# Cloud Project
+# Serverless Infrastructure on AWS
 
-Hello and welcome to my Cloud Project. So, what I created down below is a 
-serverless website with a real-time visitor counter, built on AWS. 
+Hello and welcome to my Project. I will preface by saying this, "This is not just a visitor counter on the exterior."
+
+As we dive deeper into the architecture, the real work is a private S3 bucket secured with Cloudfront and OAC (Origin Access Control), a severless REST API built with Lambda and API Gateway. A DynamoDB backend- all connected by applying least-privilege IAM policies and provisioned through Terraform.  
 
 <br>
 
@@ -49,15 +50,6 @@ serverless website with a real-time visitor counter, built on AWS.
 - HTML / CSS / JavaScript
 - Git & GitHub
 - Terraform
-
----
-
-
-## Completed
-
-- ✅ Infrastructure as Code (Terraform)
-- 🔜 CI/CD with GitHub Actions (Coming Soon)
-- 🔜 CloudWatch monitoring and alerts (Coming Soon)
 
 ---
 
