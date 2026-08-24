@@ -234,4 +234,72 @@ output "cloudfront_url" {
 
 output "api_endpoint" {
   value = "${aws_apigatewayv2_api.visitor_api.api_endpoint}/dev/visitor-count"
+} 
+# ------------------------------------------------------------------
+# OBSERVABILITY LAYER (CloudWatch + SNS Alerts)
+# ------------------------------------------------------------------
+
+# SNS Topic for email alerts
+resource "aws_sns_topic" "alert_topic" {
+  name = "lambda-error-alerts"
+}
+
+# SNS Email Subscription (CHANGE THIS TO YOUR EMAIL)
+resource "aws_sns_topic_subscription" "email_sub" {
+  topic_arn = aws_sns_topic.alert_topic.arn
+  protocol  = "email"
+  endpoint  = "aladdinali0@gmail.com"   # 
+}
+
+# CloudWatch Alarm - Triggers if Lambda has ANY errors
+resource "aws_cloudwatch_metric_alarm" "lambda_error_alarm" {
+  alarm_name          = "visitor-counter-errors"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "Errors"
+  namespace           = "AWS/Lambda"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "0"
+  alarm_description   = "Lambda function has errors"
+  alarm_actions       = [aws_sns_topic.alert_topic.arn]
+
+  dimensions = {
+    FunctionName = aws_lambda_function.visitor_counter.function_name
+  }
+}
+
+# CloudWatch Dashboard (Graphical view of your metrics)
+resource "aws_cloudwatch_dashboard" "main_dashboard" {
+  dashboard_name = "Serverless-Infrastructure"
+
+  dashboard_body = jsonencode({
+    widgets = [
+      {
+        type = "metric"
+        properties = {
+          metrics = [
+            ["AWS/Lambda", "Invocations", { stat = "Sum" }],
+            ["AWS/Lambda", "Errors", { stat = "Sum" }]
+          ]
+          period = 300
+          stat   = "Average"
+          region = "us-east-1"
+          title  = "Lambda Performance (Invocations vs Errors)"
+        }
+      },
+      {
+        type = "metric"
+        properties = {
+          metrics = [
+            ["AWS/DynamoDB", "SuccessfulRequestLatency", { stat = "Average" }]
+          ]
+          period = 300
+          stat   = "Average"
+          region = "us-east-1"
+          title  = "DynamoDB Latency"
+        }
+      }
+    ]
+  })
 }
