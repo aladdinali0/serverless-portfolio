@@ -15,7 +15,7 @@ As we dive deeper into the architecture, the real work is a private S3 bucket se
 
 <br>
 
-**Live Demo:** https://dczebdn2hrm2o.cloudfront.net
+**Live Demo:** https://www.aladdincloud.ca/
 
 <p align="center">
   <img src="screenshot.png" width="80%" alt="Screenshot" />
