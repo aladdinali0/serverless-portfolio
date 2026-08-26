@@ -2,7 +2,7 @@
 
 Hello and welcome to my Project. I will preface by saying this, "This is not just a visitor counter on the exterior."
 
-As we dive deeper into the architecture, the real work is a private S3 bucket secured with Cloudfront and OAC (Origin Access Control), a severless REST API built with Lambda and API Gateway. A DynamoDB backend- all connected by applying least-privilege IAM policies and provisioned through Terraform.  
+As we dive deeper into the architecture, the real work is a private S3 bucket secured with Cloudfront and OAC (Origin Access Control), a severless REST API built with Lambda and API Gateway. A DynamoDB backend- all connected by applying least-privilege IAM policies and provisioned through Terraform. In order to speed deployment times, deployment was automated via Github Actions and Terraform. 
 
 <br>
 
@@ -23,15 +23,23 @@ As we dive deeper into the architecture, the real work is a private S3 bucket se
   <em>Screenshot of my website.</em>
 </p>
 
----
-
 ## Architecture
-
-- **Frontend:** S3 + CloudFront (HTTPS, global CDN, private origin)
-- **Backend:** Lambda (Python) + API Gateway
-- **Database:** DynamoDB
-- **Security:** CloudFront OAC, IAM least privilege, private S3
-
+```mermaid
+flowchart TB
+    User[User Browser] --> DNS[Cloudflare DNS\nCNAME Record]
+    DNS --> CloudFront[AWS CloudFront\nHTTPS + OAC]
+    
+    CloudFront --> S3[AWS S3\nPrivate Static Files]
+    CloudFront --> API[AWS API Gateway\nREST API]
+    
+    API --> Lambda[AWS Lambda\nPython\nVisitor Counter Logic]
+    
+    Lambda --> DB[AWS DynamoDB\nVisitor Count]
+    Lambda --> CW[AWS CloudWatch\nMonitoring Dashboard]
+    
+    CW --> SNS[AWS SNS\nEmail Alerts]
+    SNS --> Email[Email to aladdinali0@gmail.com]
+```
 ---
 
 ## How It Works
@@ -41,15 +49,28 @@ As we dive deeper into the architecture, the real work is a private S3 bucket se
 3. Lambda function reads visitor count from DynamoDB, increments it, and saves it.
 4. Updated count is returned and displayed on the page.
 
+
 ---
 
-## Tech Stack
+## Services
 
-- AWS (S3, CloudFront, Lambda, API Gateway, DynamoDB, IAM)
+- **Frontend:** S3 + CloudFront (HTTPS, global CDN, private origin)
+- **Backend:** Lambda (Python) + API Gateway
+- **Database:** DynamoDB
+- **Security:** CloudFront OAC, IAM least privilege, private S3
+- **Monitoring:** CloudWatch, Lambda Invocations, Lambda Errors, Period every 5 minutes (300 seconds)
+- **SNS Email Alerts** 
+- **Certificate Manager (ACM)**
+
+
+
+## Tech Stack
+- AWS (S3, CloudFront, Lambda, API Gateway, DynamoDB, IAM, CloudWatch, ACM)
 - Python 3.12
 - HTML / CSS / JavaScript
-- Git & GitHub
+- GitHub Actions
 - Terraform
+- CloudFlare
 
 ---
 
