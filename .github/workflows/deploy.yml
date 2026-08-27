@@ -47,7 +47,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
         working-directory: cloud-frontend
 
       - name: Build React app
