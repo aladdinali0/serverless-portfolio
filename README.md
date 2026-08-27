@@ -2,7 +2,13 @@
 
 Hello and welcome to my Project. I will preface by saying this, "This is not just a visitor counter on the exterior."
 
-As we dive deeper into the architecture, the real work is a private S3 bucket secured with Cloudfront and OAC (Origin Access Control), a severless REST API built with Lambda and API Gateway. A DynamoDB backend- all connected by applying least-privilege IAM policies and provisioned through Terraform. In order to speed deployment times, deployment was automated via Github Actions and Terraform. 
+As we dive deeper into the architecture, the real work is a private S3 bucket secured with CloudFront and OAC (Origin Access Control), a serverless REST API built with Lambda and API Gateway. A DynamoDB backend- all connected by applying least-privilege IAM policies and provisioned through Terraform. 
+
+To ensure consistent, auditable, and repeatable deployments, a fully automated CI/CD (GitHub Actions) runs terraform plan on every pull request and automatically applying changes on merge to main.
+
+Observability is done via CloudWatch for real time metrics and SNS email alerts to immediately let me know if the Lambda function has any issues. 
+
+The frontend is a React SPA (Single Page Application) hosted in S3, delivered globally via CloudFront, with the custom domain secured through ACM and Cloudflare DNS.
 
 <br>
 
@@ -26,20 +32,23 @@ As we dive deeper into the architecture, the real work is a private S3 bucket se
 ## Architecture
 ```mermaid
 flowchart TB
-    User[User Browser] --> DNS[Cloudflare DNS\nCNAME Record]
-    DNS --> CloudFront[AWS CloudFront\nHTTPS + OAC]
+    User[User Browser] --> DNS[Cloudflare DNS<br>CNAME Record]
+    DNS --> CloudFront[AWS CloudFront<br>HTTPS + OAC]
     
-    CloudFront --> S3[AWS S3\nPrivate Static Files]
-    CloudFront --> API[AWS API Gateway\nREST API]
+    CloudFront --> S3[AWS S3<br>Private Static Files]
+    CloudFront --> API[AWS API Gateway<br>REST API]
     
-    API --> Lambda[AWS Lambda\nPython\nVisitor Counter Logic]
+    API --> Lambda[AWS Lambda<br>Python<br>Visitor Counter Logic]
     
-    Lambda --> DB[AWS DynamoDB\nVisitor Count]
-    Lambda --> CW[AWS CloudWatch\nMonitoring Dashboard]
+    Lambda --> DB[AWS DynamoDB<br>Visitor Count]
+    Lambda --> CW[AWS CloudWatch<br>Monitoring Dashboard]
     
-    CW --> SNS[AWS SNS\nEmail Alerts]
+    CW --> SNS[AWS SNS<br>Email Alerts]
     SNS --> Email[Email to aladdinali0@gmail.com]
 ```
+#### This follows the JAMstack pattern: a static React frontend served via CDN, with a fully decoupled serverless API backend.
+
+#### For the architecture, it's a cheap serverless pay-per-use model, ensuring near-zero cost during low traffic while being ready to scale seamlessly.
 ---
 
 ## How It Works
@@ -65,12 +74,12 @@ flowchart TB
 
 
 ## Tech Stack
-- AWS (S3, CloudFront, Lambda, API Gateway, DynamoDB, IAM, CloudWatch, ACM)
+- AWS (S3, CloudFront, Lambda, API Gateway, DynamoDB, IAM, CloudWatch, ACM, SNS)
 - Python 3.12
-- HTML / CSS / JavaScript
+- React (JavaScript), HTML5, CSS3, Node.js (npm)
 - GitHub Actions
 - Terraform
-- CloudFlare
+- CloudFlare DNS
 
 ---
 
